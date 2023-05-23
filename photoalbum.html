@@ -1,78 +1,300 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body style="background-color:rgb(25, 24, 37);"></body>
+<style>
 
-    <!-- Bootstrap CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="style.css">
-    <title>Photo Gallery</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </head>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer;
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: whitesmoke;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+
+<div style= "font-family: 'Courier New', monospace; text-align:center">
+  <h2 style = "color: rgba(227, 132, 255)"> Image Gallery</h2>
+  <h4 style = "color: rgb(227, 132, 255)">Take a look around of some amazing shots from Movies</h4>
+  <h4 style = "color: rgb(227, 132, 255)">Select an Image and scroll down to get started</h4>
+  <form>
+    <label style = "color: rgb(227, 132, 255);" for="filter">Filter by:</label>
+    <select style= "font-family: 'Courier New', monospace; background-color: rgb(227, 132, 255)" id="filter" name="filter" onchange="filterImages()">
+      <option value="all" style= "font-family: 'Courier New', monospace" >All</option>
+      <option value="action"style= "font-family: 'Courier New', monospace">Action</option>
+      <option value="comedy"style= "font-family: 'Courier New', monospace">Sci-Fi</option>
+      <option value="adventure"style= "font-family: 'Courier New', monospace">Adventure</option>
+      <option value="war"style= "font-family: 'Courier New', monospace">War</option>
+      <option value="drama"style= "font-family: 'Courier New', monospace">Drama</option>
+      <option value="thriller"style= "font-family: 'Courier New', monospace">Thriller</option>
+
+    </select>
+  </form>
+</div>
+<br>
+<!--<h3 style="color:rgb(227, 132, 255)"> </h3>-->
+
+<!-- The four columns -->
+<div class="row">
+  <div class="column" >
+    <img src="https://www.indiewire.com/wp-content/uploads/2019/04/maxresdefault-1-1.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src="https://www.indiewire.com/wp-content/uploads/2019/04/dunkirk3.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column" >
+  <img src="https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-12.05.42-PM.png?w=1278"  width = "350" height ="200" onclick="myFunction(this);"> 
+</div>
+<div class="column">
+  <img src="https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-6.32.46-PM.png?w=1273"  width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-12.05.11-PM.png?w=1276"  width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src="https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-12.16.08-PM.png?w=1272" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column" >
+  <img src="https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-6.32.08-PM.png?w=1276"  width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="https://www.indiewire.com/wp-content/uploads/2019/04/11facd9489d53ed2c6997533350e1fe3.jpg?w=1280"  width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/0f1bf5bbafa8349400924c5b6bea7e37.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/nolan19.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2022/08/Oppenheimer.jpeg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2021/03/tenet-reverse.png?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-12.49.46-PM.png?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/nolan10.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/nolan15.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-23-at-7.20.02-PM.png?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+<div class="column">
+  <img src= "https://www.indiewire.com/wp-content/uploads/2019/04/inception-411.jpg.optimal.jpg?w=1280" width = "350" height ="200" onclick="myFunction(this);">
+</div>
+
+</div>
+
+<div class="container">
+  <span style="color: white;" onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="width:100%">
+  <div id="imgtext"></div>
+  <button style="font-family: 'Courier New', monospace; color: black; background-color: rgb(227, 132, 255)" onclick="changeImageColor()">Make Gray</button>
+
+  <label for="range" style="font-family: 'Courier New', monospace; background-color: rgb(227, 132, 255); color: rgb(0, 0, 0);">Brightness:</label>
+  <input type="range" id="brightness" name="brightness" min="-100" max="100" value="0" onchange="changeBrightness()">
+
+  
+    <label  style="font-family: 'Courier New', monospace; color: black;" for="resolution"></label>
+    <select  style="font-family: 'Courier New', monospace; background-color: rgb(227, 132, 255)" id="resolution" onchange="reduceResolution()">
+      <option value="100", style="font-family: 'Courier New', monospace">Resolution</option>
+      <option value="75">75%</option>
+      <option value="50">50%</option>
+      <option value="25">25%</option>
+    </select>
+
+    <button  style="font-family: 'Courier New', monospace; background-color: rgb(227, 132, 255)" onclick="duplicateImage({width: 200, height: 150})">Duplicate Image</button>
+
     
-  <body>
-    <h1>Photo gallery</h1>
-    <div class="container">
-        
-          <div class="col">
-            <img src="https://cdn.pixabay.com/photo/2014/02/27/16/10/flowers-276014__340.jpg" class="img-fluid" alt="image1">
+        <canvas id="avatarCanvas"></canvas>
+        <div>
+          <label  style="font-family: 'Courier New', monospace; color: rgb(0, 0, 0); background-color: rgb(227, 132, 255)" for="avatarSize"style="color: aliceblue;">Avatar Size:</label>
+          <input id="avatarSize" type="range" min="50" max="200" step="1" value="100" oninput="updateAvatar()"/>
+        </div>
+        <div>
+          <label  style="font-family: 'Courier New', monospace; color: rgb(0, 0, 0); background-color: rgb(227, 132, 255)" for="avatarColor"style="color: aliceblue;">Avatar outline:</label>
+          <input id="avatarColor" type="color" value="#ffffff" oninput="updateAvatar()"/>
+    
+          <div class="qrcode-container">
+            <button  style="font-family: 'Courier New', monospace; background-color: rgb(227, 132, 255)" onclick="generateQRCode()">Generate QR Code</button>
+            <input style="font-family: 'Courier New', monospace; background-color: rgb(227, 132, 255);" type="text" id="qrCodeText" placeholder="Enter QR Code text">
           </div>
-          <div class="col">
-            <img src="https://cdn.pixabay.com/photo/2014/04/14/20/11/pink-324175__340.jpg" class="img-fluid" alt="image2">
-          </div>
-          <div class="col">
-            <img src="https://cdn.pixabay.com/photo/2015/06/19/21/24/avenue-815297__340.jpg" class="img-fluid" alt="image3">
-          </div>
-          <div class="col">
-            <img src="https://cdn.pixabay.com/photo/2012/03/01/00/55/flowers-19830__340.jpg" class="img-fluid" alt="image4">
-          </div>
-        
-        
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2014/02/27/16/10/flowers-276014__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2013/10/02/23/03/mountains-190055__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2016/01/08/11/57/butterflies-1127666__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2015/11/16/16/28/bird-1045954__340.jpg" class="img-fluid" alt="image4">
-            </div>
-        
-        
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2013/07/19/00/18/splashing-165192__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2013/08/20/15/47/poppies-174276__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2015/07/05/10/18/tree-832079__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__340.png" class="img-fluid" alt="image4">
-            </div>
-        
-        
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2012/03/01/00/55/flowers-19830__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2013/04/03/12/05/tree-99852__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2012/03/01/00/55/flowers-19830__340.jpg" class="img-fluid" alt="image4">
-            </div>
-            <div class="col">
-                <img src="https://cdn.pixabay.com/photo/2012/03/01/00/55/flowers-19830__340.jpg" class="img-fluid" alt="image4">
-            </div>
-        
+</div>
 
-      </div>
 
-  </body>
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+
+function changeImageColor() {
+  var expandImg = document.getElementById("expandedImg");
+  expandImg.style.filter = "grayscale(100%)";
+}
+function changeBrightness() {
+  var brightness = document.getElementById("brightness").value;
+  var img = document.getElementById("expandedImg");
+  img.style.filter = "brightness(" + (2+ brightness) + "%)"; // adjust brightness
+}
+function reduceResolution() {
+  var expandImg = document.getElementById("expandedImg");
+  var resolution = document.getElementById("resolution").value;
+  expandImg.style.width = resolution + "%";
+}
+function duplicateImage() {
+  // Get the expanded image and create a new element
+  var expandImg = document.getElementById("expandedImg");
+  var newImg = document.createElement("img");
+  
+  // Set the new image source to the expanded image source
+  newImg.src = expandImg.src;
+  
+  // Set the new image size based on the user's input
+  var size = prompt("Enter size of duplicated image (in pixels):");
+  newImg.style.width = size + "px";
+  newImg.style.height = size + "px";
+  
+  // Set the new image resolution to 25%
+  newImg.style.imageRendering = "pixelated";
+  newImg.style.width = (expandImg.width / 4) + "px";
+  newImg.style.height = (expandImg.height / 4) + "px";
+  
+  // Add the new image to the document
+  document.body.appendChild(newImg);
+}
+function updateAvatar() {
+  var canvas = document.getElementById('avatarCanvas');
+  var sizeInput = document.getElementById('avatarSize');
+  var colorInput = document.getElementById('avatarColor');
+  var context = canvas.getContext('2d');
+  var expandImg = document.getElementById('expandedImg');
+  var size = parseInt(sizeInput.value, 10);
+
+  canvas.width = size;
+  canvas.height = size;
+  context.clearRect(0, 0, size, size);
+  context.save();
+  context.beginPath();
+  context.arc(size/2, size/2, size/2, 0, 2*Math.PI);
+  context.clip();
+  context.drawImage(expandImg, 0, 0, size, size);
+  context.restore();
+  context.beginPath();
+  context.arc(size/2, size/2, size/2, 0, 2*Math.PI);
+  context.strokeStyle = colorInput.value;
+  context.stroke();
+}
+function generateQRCode() {
+  var qrCodeText = document.getElementById("qrCodeText").value;
+  if (qrCodeText) {
+    var qrCodeUrl = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" + encodeURIComponent(qrCodeText);
+    var qrCodeImg = document.createElement("img");
+    qrCodeImg.setAttribute("src", qrCodeUrl);
+    qrCodeImg.setAttribute("alt", "QR Code for " + qrCodeText);
+    qrCodeImg.style.display = "block";
+    qrCodeImg.style.margin = "auto";
+    var qrcodeContainer = document.querySelector(".qrcode-container");
+    qrcodeContainer.appendChild(qrCodeImg);
+  }
+}
+function filterImages() {
+  var select = document.getElementById("filter");
+  var filter = select.options[select.selectedIndex].value;
+  var images = document.getElementsByTagName("img");
+  for (var i = 0; i < images.length; i++) {
+    var image = images[i];
+    if (filter === "all" || image.dataset.tags.indexOf(filter) > -1) {
+      image.style.display = "";
+    } else {
+      image.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
 </html>
